@@ -1,5 +1,10 @@
 # Document Analyzer
 
+## General info
+1. The database is H2.
+2. Using S3 localstack for storage.
+
+
 ## Setup
 - Configure the `.env` file with your environment variables.
 
