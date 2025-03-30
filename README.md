@@ -88,3 +88,5 @@ GET http://localhost:8080/api/user/count-lazy-users?startDate=2023-06-01 00:00:0
 3. **More unit tests**: The tests created cover basic scenarios; expanding to edge cases (e.g. null string, S3 failure) increases robustness.
 4. **Integration tests**: Tests that verify the actual integration between `DocumentService`, S3, and the database, possibly using LocalStack and Testcontainers.
 5. **Anonymized IDs**: Replace sensitive identifiers (like `userEmail`) with generated IDs (e.g. UUIDs) to protect personal data.
+6. **Create request and response objects for all APIs**: Define specific request and response DTOs for each API endpoint to improve type safety and validation.
+7. **Generate Swagger**: Add Swagger/OpenAPI support to automatically document API endpoints and provide an interactive interface.
