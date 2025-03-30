@@ -1,0 +1,34 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_REGION=us-east-1
+      - AWS_S3_ENDPOINT=http://localstack:4566
+      - AWS_S3_BUCKET=my-document-bucket
+      - YOUR_GEMINI_API_KEY=${YOUR_GEMINI_API_KEY}
+    depends_on:
+      - localstack
+
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      - DEFAULT_REGION=us-east-1
+      - EAGER_SERVICE_LOADING=true
+      - HOSTNAME_EXTERNAL=localstack
+    volumes:
+      - localstack-data:/var/lib/localstack
+      - ./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh
+    command: >
+      bash -c "chmod +x /etc/localstack/init/ready.d/init-aws.sh && localstack"
+
+volumes:
+  localstack-data:

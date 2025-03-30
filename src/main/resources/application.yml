@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: document-analyzer
+  datasource:
+    url: jdbc:h2:mem:document_analyzer
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+    h2:
+      console:
+        enabled: true
+    sql:
+      init:
+        mode: always
+        schema-locations: classpath:schema.sql
+
+  ai:
+    openai:
+      api-key: ${YOUR_GEMINI_API_KEY}
+      chat:
+        base-url: https://generativelanguage.googleapis.com
+        completions-path: /v1beta/openai/chat/completions
+        options:
+          model: gemini-2.0-flash
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+app:
+  synonym:
+    prompt: "Provide {0} synonyms in a simple list for {1}, ensuring they are contextually appropriate for general use."
+  document:
+    excluded-words: >
+      the,
+      me,
+      you,
+      i,
+      of,
+      and,
+      a,
+      we
+
+aws:
+  accessKeyId: test
+  secretKey: test
+  region: us-east-1
+  s3:
+    bucket: my-document-bucket
+    endpoint: http://localhost:4566
+
+
+
+
